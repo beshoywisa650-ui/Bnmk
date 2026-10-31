@@ -124,7 +124,7 @@ export const TransactionDetailModal = ({ expense, onClose, onEdit }) => {
 				/* @__PURE__ */ _jsxs("div", {
 					className: "p-5 space-y-3 text-sm text-slate-700 dark:text-slate-300",
 					children: [
-						isTransfer ? /* @__PURE__ */ _jsxs(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ _jsxs("div", {
+						isTransfer ? /* @__PURE__ */ _jsxs(_Fragment, { children: [/* @__PURE__ */ _jsxs("div", {
 							className: "flex items-center justify-between py-1.5 border-b border-slate-100 dark:border-slate-800",
 							children: [/* @__PURE__ */ _jsxs("span", {
 								className: "text-slate-500 dark:text-slate-400 flex items-center gap-2",
@@ -150,7 +150,7 @@ export const TransactionDetailModal = ({ expense, onClose, onEdit }) => {
 								className: "font-semibold text-slate-900 dark:text-white",
 								children: getAccountDisplayName(toAccount?.name || "Account", language)
 							})]
-						})] }) : /* @__PURE__ */ _jsxs(import_jsx_runtime.Fragment, { children: [expense.merchant && /* @__PURE__ */ _jsxs("div", {
+						})] }) : /* @__PURE__ */ _jsxs(_Fragment, { children: [expense.merchant && /* @__PURE__ */ _jsxs("div", {
 							className: "flex items-center justify-between py-1.5 border-b border-slate-100 dark:border-slate-800",
 							children: [/* @__PURE__ */ _jsxs("span", {
 								className: "text-slate-500 dark:text-slate-400 flex items-center gap-2",

@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, useEffect, useMemo, useCall
 import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 import { localDB, DEFAULT_CATEGORIES, DEFAULT_ACCOUNTS, DEFAULT_SETTINGS, DEFAULT_BUDGET } from '../db/indexedDB';
 import { Expense, Category, Account, Budget, RecurringTransaction, FilterOptions, AppSettings, ToastMessage } from '../types';
-import { translations } from '../utils/i18n';
+import { translations, formatMonthLabel } from '../utils/i18n';
 import {
   calculateBudgetPace,
   calculateAccountSummaries,
@@ -21,9 +21,6 @@ import {
 import { exportFile } from '../utils/fileExport';
 
 
-var import_jsx_runtime = (/* @__PURE__ */ __commonJSMin(((exports, module) => {
-	module.exports = require_react_jsx_runtime_production();
-})))();
 var initialFilters = {
 	search: "",
 	type: "all",

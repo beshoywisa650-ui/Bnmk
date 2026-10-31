@@ -187,7 +187,7 @@ export const InsightsScreen = () => {
 						children: /* @__PURE__ */ _jsx("span", { children: t.insights.addExpense })
 					})]
 				})]
-			}) : /* @__PURE__ */ _jsxs(import_jsx_runtime.Fragment, { children: [
+			}) : /* @__PURE__ */ _jsxs(_Fragment, { children: [
 				/* @__PURE__ */ _jsxs("div", {
 					className: "relative overflow-hidden rounded-2xl sm:rounded-3xl p-4 sm:p-5 bg-gradient-to-br from-[#070b14] via-[#0d1527] to-[#151c38] text-white border border-blue-500/20 shadow-xs space-y-3.5",
 					children: [
@@ -323,7 +323,7 @@ export const InsightsScreen = () => {
 						}), /* @__PURE__ */ _jsx("span", { children: language === "ar" ? "خلاصة الشهر" : "Month Takeaway" })]
 					}), /* @__PURE__ */ _jsx("p", {
 						className: "text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed",
-						children: language === "ar" ? /* @__PURE__ */ _jsxs(import_jsx_runtime.Fragment, { children: [
+						children: language === "ar" ? /* @__PURE__ */ _jsxs(_Fragment, { children: [
 							"بند ",
 							/* @__PURE__ */ _jsx("strong", {
 								className: "text-slate-900 dark:text-white font-bold",
@@ -338,7 +338,7 @@ export const InsightsScreen = () => {
 							" (",
 							formatCurrency(topCategory.total, settings.currency, "ar", false, numberFormat),
 							").",
-							insights.largestExpense && insights.largestExpense.amount > 0 && /* @__PURE__ */ _jsxs(import_jsx_runtime.Fragment, { children: [
+							insights.largestExpense && insights.largestExpense.amount > 0 && /* @__PURE__ */ _jsxs(_Fragment, { children: [
 								" وكانت أكبر معاملة منفردة بقيمة ",
 								/* @__PURE__ */ _jsx("strong", {
 									className: "text-slate-900 dark:text-white font-bold",
@@ -347,7 +347,7 @@ export const InsightsScreen = () => {
 								insights.largestExpense.note ? ` (${insights.largestExpense.note})` : "",
 								"."
 							] })
-						] }) : /* @__PURE__ */ _jsxs(import_jsx_runtime.Fragment, { children: [
+						] }) : /* @__PURE__ */ _jsxs(_Fragment, { children: [
 							/* @__PURE__ */ _jsx("strong", {
 								className: "text-slate-900 dark:text-white font-bold",
 								children: getCategoryDisplayName(topCategory.category.name, "en")
@@ -361,7 +361,7 @@ export const InsightsScreen = () => {
 							" (",
 							formatCurrency(topCategory.total, settings.currency, "en", false, numberFormat),
 							").",
-							insights.largestExpense && insights.largestExpense.amount > 0 && /* @__PURE__ */ _jsxs(import_jsx_runtime.Fragment, { children: [
+							insights.largestExpense && insights.largestExpense.amount > 0 && /* @__PURE__ */ _jsxs(_Fragment, { children: [
 								" The single largest transaction was ",
 								/* @__PURE__ */ _jsx("strong", {
 									className: "text-slate-900 dark:text-white font-bold",

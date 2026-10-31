@@ -4,8 +4,23 @@ import { Expense, Category, Account, Budget, RecurringTransaction, AppSettings }
 
 export const DB_NAME = "AuraSpendDB";
 export const DB_VERSION = 1;
-export const DEFAULT_CATEGORIES = [];
-export const DEFAULT_ACCOUNTS = [];
+export const DEFAULT_CATEGORIES = [
+  { id: 'cat-food', name: 'طعام ومأكولات', nameAr: 'طعام ومأكولات', nameEn: 'Food & Dining', icon: 'Utensils', color: '#EF4444', sortOrder: 1, isActive: true },
+  { id: 'cat-groceries', name: 'سوبرماركت وبقالة', nameAr: 'سوبرماركت وبقالة', nameEn: 'Groceries', icon: 'ShoppingCart', color: '#F97316', sortOrder: 2, isActive: true },
+  { id: 'cat-transport', name: 'مواصلات وبنزين', nameAr: 'مواصلات وبنزين', nameEn: 'Transport', icon: 'Car', color: '#0EA5E9', sortOrder: 3, isActive: true },
+  { id: 'cat-bills', name: 'فواتير وكهرباء', nameAr: 'فواتير وكهرباء', nameEn: 'Bills & Utilities', icon: 'Zap', color: '#F59E0B', sortOrder: 4, isActive: true },
+  { id: 'cat-coffee', name: 'قهوة وكافيه', nameAr: 'قهوة وكافيه', nameEn: 'Coffee & Drinks', icon: 'Coffee', color: '#B45309', sortOrder: 5, isActive: true },
+  { id: 'cat-health', name: 'صحة وصيدلية', nameAr: 'صحة وصيدلية', nameEn: 'Health & Pharmacy', icon: 'HeartPulse', color: '#EC4899', sortOrder: 6, isActive: true },
+  { id: 'cat-shopping', name: 'تسوق وملابس', nameAr: 'تسوق وملابس', nameEn: 'Shopping & Clothes', icon: 'ShoppingBag', color: '#A855F7', sortOrder: 7, isActive: true },
+  { id: 'cat-salary', name: 'راتب ودخل عمل', nameAr: 'راتب ودخل عمل', nameEn: 'Salary & Work', icon: 'Briefcase', color: '#15803D', sortOrder: 8, isActive: true, type: 'income' },
+  { id: 'cat-general', name: 'عام ومصروفات أخرى', nameAr: 'عام ومصروفات أخرى', nameEn: 'General / Other', icon: 'Tag', color: '#64748B', sortOrder: 9, isActive: true }
+];
+
+export const DEFAULT_ACCOUNTS = [
+  { id: 'acc-cash', name: 'كاش ونقد', nameAr: 'كاش ونقد', nameEn: 'Cash', type: 'cash', openingBalance: 0, currentBalance: 0, icon: 'Banknote', color: '#10B981', sortOrder: 1, isArchived: false },
+  { id: 'acc-bank', name: 'حساب بنكي', nameAr: 'حساب بنكي', nameEn: 'Bank Account', type: 'bank', openingBalance: 0, currentBalance: 0, icon: 'Landmark', color: '#1E3A8A', sortOrder: 2, isArchived: false },
+  { id: 'acc-wallet', name: 'محفظة إلكترونية', nameAr: 'محفظة إلكترونية', nameEn: 'Mobile Wallet', type: 'wallet', openingBalance: 0, currentBalance: 0, icon: 'Smartphone', color: '#EA580C', sortOrder: 3, isArchived: false }
+];
 export const DEFAULT_SETTINGS = {
 	currency: "EGP",
 	currencySymbol: "ج.م",
@@ -120,6 +135,16 @@ export class LocalDatabase {
 			});
 		}
 		if (existingBudgets.length === 0) await this.put("budgets", DEFAULT_BUDGET);
+		if (existingCategories.length === 0) {
+			for (const cat of DEFAULT_CATEGORIES) {
+				await this.put("categories", cat);
+			}
+		}
+		if (existingAccounts.length === 0) {
+			for (const acc of DEFAULT_ACCOUNTS) {
+				await this.put("accounts", acc);
+			}
+		}
 	}
 	/**
 	* Reset application data to empty state.

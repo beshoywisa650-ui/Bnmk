@@ -5,6 +5,7 @@ import { CircleCheck, Clock, Lock, Fingerprint, Delete } from 'lucide-react';
 
 import { triggerHaptic } from '../../utils/haptics';
 import { isBiometricsSupported, authenticateWithBiometrics } from '../../utils/biometrics';
+import { normalizeArabicNumerals } from '../../utils/calculations';
 
 
 export const LockScreen = ({ onUnlock, savedPasscode = "123456", biometricEnabled = true, pinEnabled = true, language = "ar" }) => {

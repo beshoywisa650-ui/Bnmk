@@ -16,7 +16,9 @@ import {
   getCurrencySymbol,
   normalizeArabicNumerals,
   parseMoneyInput,
-  validateTransfer
+  validateTransfer,
+  formatNumber,
+  getLocalDateString
 } from '../../utils/calculations';
 import {
   getCategoryDisplayName,
@@ -940,7 +942,7 @@ export const SettingsScreen = () => {
 											}),
 											/* @__PURE__ */ _jsx("span", { children: "·" }),
 											/* @__PURE__ */ _jsx("span", { children: getFrequencyDisplayName(rec.frequency, language) }),
-											rec.nextOccurrence && /* @__PURE__ */ _jsxs(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ _jsx("span", { children: "·" }), /* @__PURE__ */ _jsx("span", { children: rec.nextOccurrence })] })
+											rec.nextOccurrence && /* @__PURE__ */ _jsxs(_Fragment, { children: [/* @__PURE__ */ _jsx("span", { children: "·" }), /* @__PURE__ */ _jsx("span", { children: rec.nextOccurrence })] })
 										]
 									})]
 								}), /* @__PURE__ */ _jsx("div", {
@@ -1355,7 +1357,7 @@ export const SettingsScreen = () => {
 									children: [/* @__PURE__ */ _jsx(Fingerprint, { size: 13 }), /* @__PURE__ */ _jsx("span", { children: isAr ? "نسيت الرمز؟ تحقق ببصمة الإصبع" : "Forgot PIN? Verify with Fingerprint" })]
 								})
 							] }),
-							!isDisablingPin && /* @__PURE__ */ _jsxs(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("label", {
+							!isDisablingPin && /* @__PURE__ */ _jsxs(_Fragment, { children: [/* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("label", {
 								className: "block text-slate-600 dark:text-slate-400 mb-1 font-semibold",
 								children: isChangingPin ? isAr ? "أدخل الرمز الجديد (6 أرقام):" : "Enter new 6-digit PIN:" : isAr ? "أدخل رمزاً مكوناً من 6 أرقام:" : "Enter 6-digit PIN:"
 							}), /* @__PURE__ */ _jsx("input", {
