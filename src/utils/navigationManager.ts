@@ -64,14 +64,12 @@ export class NavigationManager {
 				return true;
 			}
 		}
-		if (this.currentTab !== "home") {
-			if (this.onSwitchTab) {
-				this.onSwitchTab("home");
-				return true;
-			}
-		}
 		try {
-			if (Capacitor.isNativePlatform()) CapacitorApp.exitApp();
+			if (Capacitor.isNativePlatform()) {
+				CapacitorApp.exitApp();
+			} else if (typeof window !== "undefined") {
+				window.close();
+			}
 		} catch {}
 		return false;
 	}

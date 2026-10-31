@@ -35,9 +35,13 @@ export const HomeScreen = () => {
 		if (!selectedWalletId) return [];
 		return expenses.filter((e) => !e.isDeleted && (e.accountId === selectedWalletId || e.paymentMethodId === selectedWalletId || e.fromAccountId === selectedWalletId || e.toAccountId === selectedWalletId)).slice(0, 4);
 	}, [selectedWalletId, expenses]);
+	const isWalletsSectionVisible = settings.showWalletsOnHome !== false;
 	const visibleHomeWallets = useMemo(() => {
-		return accountSummaries.summaries.filter((s) => s.account.isActive && Boolean(s.account.showOnHome));
-	}, [accountSummaries]);
+		if (!isWalletsSectionVisible) return [];
+		return accountSummaries.summaries.filter(
+			(s) => s.account.isActive !== false && !s.account.isArchived && s.account.showOnHome !== false
+		);
+	}, [accountSummaries, isWalletsSectionVisible]);
 	const todayData = useMemo(() => {
 		const todayStr = getLocalDateString(referenceDate);
 		return getTodayExpenses(expenses, todayStr);
@@ -220,7 +224,7 @@ export const HomeScreen = () => {
 					})
 				]
 			}),
-			visibleHomeWallets.length > 0 && /* @__PURE__ */ _jsxs("div", {
+			isWalletsSectionVisible && /* @__PURE__ */ _jsxs("div", {
 				className: "bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl p-4 border border-slate-200/90 dark:border-slate-800/80 shadow-xs space-y-3",
 				children: [/* @__PURE__ */ _jsxs("div", {
 					className: "flex items-center justify-between",
@@ -259,7 +263,7 @@ export const HomeScreen = () => {
 							})
 						})
 					})]
-				}), /* @__PURE__ */ _jsxs("div", {
+				}), visibleHomeWallets.length > 0 ? /* @__PURE__ */ _jsxs("div", {
 					className: "flex items-center gap-2.5 overflow-x-auto no-scrollbar py-0.5",
 					children: [visibleHomeWallets.map((s) => {
 						const isOwed = s.currentBalance < 0;
@@ -310,6 +314,20 @@ export const HomeScreen = () => {
 							children: language === "ar" ? "محفظة" : "Wallet"
 						})]
 					})]
+				}) : /* @__PURE__ */ _jsxs("div", {
+					className: "py-3 px-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-dashed border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2 text-xs",
+					children: [
+						/* @__PURE__ */ _jsx("span", {
+							className: "text-slate-500 dark:text-slate-400",
+							children: language === "ar" ? "جميع المحافظ مخفية من الرئيسية" : "All wallets are hidden from home"
+						}),
+						/* @__PURE__ */ _jsx("button", {
+							type: "button",
+							onClick: () => setIsWalletModalOpen(true),
+							className: "text-blue-600 dark:text-blue-400 font-bold hover:underline cursor-pointer",
+							children: language === "ar" ? "إظهار أو إدارة" : "Manage / Show"
+						})
+					]
 				})]
 			}),
 			/* @__PURE__ */ _jsxs("div", {
@@ -520,11 +538,11 @@ export const HomeScreen = () => {
 					]
 				})
 			}),
-			/* @__PURE__ */ _jsx(WalletManagementModal, {
+			isWalletModalOpen && /* @__PURE__ */ _jsx(WalletManagementModal, {
 				isOpen: isWalletModalOpen,
 				onClose: () => setIsWalletModalOpen(false)
 			}),
-			/* @__PURE__ */ _jsx(QuickBudgetModal, {
+			isBudgetModalOpen && /* @__PURE__ */ _jsx(QuickBudgetModal, {
 				isOpen: isBudgetModalOpen,
 				onClose: () => setIsBudgetModalOpen(false),
 				currentBudget: budget?.amount || 0,

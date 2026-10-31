@@ -1,13 +1,13 @@
 // @ts-nocheck
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from 'react/jsx-runtime';
-import { Navigation, House, ArrowLeftRight, Plus, ChartLine, Settings } from 'lucide-react';
+import { House, ArrowLeftRight, Plus, ChartLine, Settings } from 'lucide-react';
 
 import { useApp } from '../../context/AppContext';
 import { triggerHaptic } from '../../utils/haptics';
 
 
-export const BottomNavigation = () => {
+export const BottomNavigation = React.memo(() => {
 	const { activeTab, setActiveTab, openAddExpense, language, t } = useApp();
 	return /* @__PURE__ */ _jsx("nav", {
 		role: "navigation",
@@ -96,4 +96,4 @@ export const BottomNavigation = () => {
 			]
 		})
 	});
-};
+});

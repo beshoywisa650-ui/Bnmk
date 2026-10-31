@@ -14,7 +14,6 @@ import { App as CapacitorApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { useBackHandler } from '../../hooks/useBackHandler';
 import { navigationManager } from '../../utils/navigationManager';
-import { Shield } from 'lucide-react';
 
 export const MobileShell: React.FC = () => {
   const { 
@@ -30,11 +29,6 @@ export const MobileShell: React.FC = () => {
     settings,
     isLoading,
     language,
-    showToast,
-    expenses,
-    accounts,
-    categories,
-    recurring,
     updateSettings
   } = useApp();
 
@@ -55,7 +49,6 @@ export const MobileShell: React.FC = () => {
       return false;
     }
   });
-  const [isAppBlurred, setIsAppBlurred] = useState(false);
 
   // Sync isLocked whenever isLockEnabled becomes active
   useEffect(() => {
@@ -78,24 +71,8 @@ export const MobileShell: React.FC = () => {
 
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        if (settings.privacyBlurEnabled ?? true) {
-          setIsAppBlurred(true);
-        }
-        lockAppImmediately();
-      } else {
-        if (settings.privacyBlurEnabled ?? true) {
-          setIsAppBlurred(false);
-        }
         lockAppImmediately();
       }
-    };
-
-    const handlePageHide = () => {
-      lockAppImmediately();
-    };
-
-    const handleBlur = () => {
-      lockAppImmediately();
     };
 
     const handleLockNow = () => {
@@ -103,8 +80,6 @@ export const MobileShell: React.FC = () => {
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('pagehide', handlePageHide);
-    window.addEventListener('blur', handleBlur);
     window.addEventListener('masrofy_lock_now', handleLockNow);
 
     // Native Android App Lifecycle listener via Capacitor
@@ -113,8 +88,6 @@ export const MobileShell: React.FC = () => {
       if (Capacitor.isNativePlatform()) {
         CapacitorApp.addListener('appStateChange', ({ isActive }: { isActive: boolean }) => {
           if (!isActive) {
-            lockAppImmediately();
-          } else {
             lockAppImmediately();
           }
         }).then((listener: any) => {
@@ -125,14 +98,12 @@ export const MobileShell: React.FC = () => {
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('pagehide', handlePageHide);
-      window.removeEventListener('blur', handleBlur);
       window.removeEventListener('masrofy_lock_now', handleLockNow);
       if (capacitorListener?.remove) {
         capacitorListener.remove();
       }
     };
-  }, [isLockEnabled, settings.privacyBlurEnabled]);
+  }, [isLockEnabled]);
 
   // Unified Tab & Back Navigation:
   useEffect(() => {
@@ -179,36 +150,28 @@ export const MobileShell: React.FC = () => {
       </main>
 
       {/* Add Expense / Income Modal */}
-      <AddExpenseModal
-        isOpen={isAddExpenseOpen}
-        onClose={() => {
-          closeAddExpense();
-          setEditingExpense(null);
-        }}
-        editExpense={editingExpense}
-      />
+      {isAddExpenseOpen && (
+        <AddExpenseModal
+          isOpen={isAddExpenseOpen}
+          onClose={() => {
+            closeAddExpense();
+            setEditingExpense(null);
+          }}
+          editExpense={editingExpense}
+        />
+      )}
 
       {/* Transaction Details Modal */}
-      <TransactionDetailModal
-        expense={viewingExpense}
-        onClose={() => setViewingExpense(null)}
-        onEdit={(exp) => {
-          setViewingExpense(null);
-          setEditingExpense(exp);
-          openAddExpense();
-        }}
-      />
-
-      {/* App Switcher Privacy Blur Veil */}
-      {isAppBlurred && !isLocked && (
-        <div className="fixed inset-0 z-40 bg-slate-950/90 backdrop-blur-2xl flex flex-col items-center justify-center p-6 text-white text-center select-none animate-in fade-in duration-150">
-          <div className="w-16 h-16 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-3 shadow-lg">
-            <Shield size={32} />
-          </div>
-          <span className="text-base font-extrabold text-slate-200">
-            {language === 'ar' ? 'مصروفي محمي بالخصوصية' : 'Masrofy Privacy Guard'}
-          </span>
-        </div>
+      {viewingExpense && (
+        <TransactionDetailModal
+          expense={viewingExpense}
+          onClose={() => setViewingExpense(null)}
+          onEdit={(exp) => {
+            setViewingExpense(null);
+            setEditingExpense(exp);
+            openAddExpense();
+          }}
+        />
       )}
 
       {/* Biometric & Passcode Lock Screen */}

@@ -26,7 +26,7 @@ interface SwipeableTransactionItemProps {
   duplicateLabel?: string;
 }
 
-export const SwipeableTransactionItem: React.FC<SwipeableTransactionItemProps> = ({
+export const SwipeableTransactionItem = React.memo<SwipeableTransactionItemProps>(({
   expense,
   category,
   fromAccount,
@@ -231,4 +231,4 @@ export const SwipeableTransactionItem: React.FC<SwipeableTransactionItemProps> =
       </div>
     </div>
   );
-};
+});

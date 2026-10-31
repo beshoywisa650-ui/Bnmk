@@ -17,9 +17,9 @@ export const DEFAULT_CATEGORIES = [
 ];
 
 export const DEFAULT_ACCOUNTS = [
-  { id: 'acc-cash', name: 'كاش ونقد', nameAr: 'كاش ونقد', nameEn: 'Cash', type: 'cash', openingBalance: 0, currentBalance: 0, icon: 'Banknote', color: '#10B981', sortOrder: 1, isArchived: false },
-  { id: 'acc-bank', name: 'حساب بنكي', nameAr: 'حساب بنكي', nameEn: 'Bank Account', type: 'bank', openingBalance: 0, currentBalance: 0, icon: 'Landmark', color: '#1E3A8A', sortOrder: 2, isArchived: false },
-  { id: 'acc-wallet', name: 'محفظة إلكترونية', nameAr: 'محفظة إلكترونية', nameEn: 'Mobile Wallet', type: 'wallet', openingBalance: 0, currentBalance: 0, icon: 'Smartphone', color: '#EA580C', sortOrder: 3, isArchived: false }
+  { id: 'acc-cash', name: 'كاش ونقد', nameAr: 'كاش ونقد', nameEn: 'Cash', type: 'cash', openingBalance: 0, currentBalance: 0, icon: 'Banknote', color: '#10B981', sortOrder: 1, isActive: true, isArchived: false, showOnHome: true },
+  { id: 'acc-bank', name: 'حساب بنكي', nameAr: 'حساب بنكي', nameEn: 'Bank Account', type: 'bank', openingBalance: 0, currentBalance: 0, icon: 'Landmark', color: '#1E3A8A', sortOrder: 2, isActive: true, isArchived: false, showOnHome: true },
+  { id: 'acc-wallet', name: 'محفظة إلكترونية', nameAr: 'محفظة إلكترونية', nameEn: 'Mobile Wallet', type: 'wallet', openingBalance: 0, currentBalance: 0, icon: 'Smartphone', color: '#EA580C', sortOrder: 3, isActive: true, isArchived: false, showOnHome: true }
 ];
 export const DEFAULT_SETTINGS = {
 	currency: "EGP",
@@ -35,7 +35,7 @@ export const DEFAULT_SETTINGS = {
 	autoLockTimeout: "immediately",
 	privacyBlurEnabled: true,
 	autoPrivacyModeOnLaunch: false,
-	showWalletsOnHome: false,
+	showWalletsOnHome: true,
 	firstDayOfMonth: 1,
 	budgetNotificationThreshold: 80,
 	hasCompletedOnboarding: true,

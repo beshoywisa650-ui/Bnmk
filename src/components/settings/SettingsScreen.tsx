@@ -472,6 +472,31 @@ export const SettingsScreen = () => {
 						})]
 					}),
 					/* @__PURE__ */ _jsxs("div", {
+						className: "px-4 py-3 flex items-center justify-between gap-3 bg-slate-50/50 dark:bg-slate-850/30",
+						children: [/* @__PURE__ */ _jsxs("div", {
+							className: "flex items-center gap-3 min-w-0 ps-2",
+							children: [/* @__PURE__ */ _jsxs("div", {
+								className: "min-w-0",
+								children: [/* @__PURE__ */ _jsx("span", {
+									className: "text-xs font-semibold text-slate-800 dark:text-slate-200 block",
+									children: isAr ? "إظهار قسم المحافظ في الرئيسية" : "Show wallets on Home"
+								}), /* @__PURE__ */ _jsx("span", {
+									className: "text-[10px] text-slate-400 block",
+									children: isAr ? "عرض بطاقات المحافظ والأرصدة في الشاشة الرئيسية" : "Display wallet cards on home screen"
+								})]
+							})]
+						}), /* @__PURE__ */ _jsx("button", {
+							type: "button",
+							role: "switch",
+							"aria-checked": settings.showWalletsOnHome !== false,
+							onClick: () => updateSettings({ showWalletsOnHome: !(settings.showWalletsOnHome !== false) }),
+							className: `relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-hidden ${settings.showWalletsOnHome !== false ? "bg-blue-600" : "bg-slate-300 dark:bg-slate-700"}`,
+							children: /* @__PURE__ */ _jsx("span", {
+								className: `pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-sm ring-0 transition duration-200 ease-in-out ${settings.showWalletsOnHome !== false ? "ltr:translate-x-4 rtl:-translate-x-4" : "translate-x-0"}`
+							})
+						})]
+					}),
+					/* @__PURE__ */ _jsxs("div", {
 						onClick: () => setIsCategoriesSheetOpen(true),
 						className: "px-4 py-3.5 flex items-center justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-850/60 transition-colors cursor-pointer group select-none",
 						children: [/* @__PURE__ */ _jsxs("div", {
@@ -758,7 +783,7 @@ export const SettingsScreen = () => {
 					]
 				})
 			] }),
-			/* @__PURE__ */ _jsx(WalletManagementModal, {
+			isWalletsSheetOpen && /* @__PURE__ */ _jsx(WalletManagementModal, {
 				isOpen: isWalletsSheetOpen,
 				onClose: () => setIsWalletsSheetOpen(false)
 			}),

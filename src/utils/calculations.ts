@@ -1180,7 +1180,7 @@ export function validateBackupJSON(jsonStr) {
 						icon: typeof acc.icon === "string" ? acc.icon : "Wallet",
 						isActive: acc.isActive !== false,
 						isArchived: Boolean(acc.isArchived),
-						showOnHome: Boolean(acc.showOnHome),
+						showOnHome: acc.showOnHome !== false,
 						createdAt: typeof acc.createdAt === "string" ? acc.createdAt : (/* @__PURE__ */ new Date()).toISOString(),
 						updatedAt: typeof acc.updatedAt === "string" ? acc.updatedAt : (/* @__PURE__ */ new Date()).toISOString()
 					});

@@ -47,7 +47,9 @@ export interface Account {
   currentBalance?: number;
   icon?: string;
   color?: string;
+  isActive?: boolean;
   isArchived?: boolean;
+  showOnHome?: boolean;
   sortOrder?: number;
   createdAt?: string;
   updatedAt?: string;
